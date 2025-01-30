@@ -34,5 +34,10 @@
     "vite-plugin-electron-renderer": "^0.14.5",
     "vue": "^3.4.21",
     "vue-tsc": "^2.0.6"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "roboto-fontface": "^0.10.0",
+    "vuetify": "^3.7.9"
   }
 }

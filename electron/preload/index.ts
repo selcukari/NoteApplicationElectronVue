@@ -18,9 +18,17 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     const [channel, ...omit] = args
     return ipcRenderer.invoke(channel, ...omit)
   },
-
-  // You can expose other APTs you need here.
-  // ...
+  store: {
+    get(key) {
+      return ipcRenderer.invoke('store-get', key);
+    },
+    set(key, value) {
+      ipcRenderer.invoke('store-set', { key, value })
+    },
+    delete(key) {
+      ipcRenderer.invoke('store-delete', key)
+    },
+  }
 })
 
 // --------- Preload scripts loading ---------

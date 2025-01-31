@@ -1,4 +1,5 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import Store from 'electron-store';
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -6,6 +7,7 @@ import os from 'node:os'
 
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const store = new Store();
 
 // The built directory structure
 //
@@ -108,7 +110,7 @@ ipcMain.handle('open-win', (_, arg) => {
     webPreferences: {
       preload,
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
     },
   })
 
@@ -118,3 +120,12 @@ ipcMain.handle('open-win', (_, arg) => {
     childWindow.loadFile(indexHtml, { hash: arg })
   }
 })
+
+// IPC listener
+ipcMain.handle('store-get', (_, key) => store.get(key));
+ipcMain.handle('store-set', (_, { key, value }) => store.set(key, value));
+ipcMain.handle('store-delete', (_, key) => {
+  if (store.has(key)) {
+    store.delete(key);
+  }
+});

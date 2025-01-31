@@ -28,6 +28,7 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "electron": "^29.1.1",
     "electron-builder": "^24.13.3",
+    "sass-embedded": "^1.83.4",
     "typescript": "^5.4.2",
     "vite": "^5.1.5",
     "vite-plugin-electron": "^0.28.4",
@@ -38,6 +39,10 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
+    "date-fns": "^4.1.0",
+    "electron-store": "^10.0.1",
+    "pug": "^3.0.3",
+    "ramda": "^0.30.1",
     "roboto-fontface": "^0.10.0",
     "vuetify": "^3.7.9"
   }

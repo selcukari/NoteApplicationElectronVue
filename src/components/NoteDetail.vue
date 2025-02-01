@@ -18,9 +18,9 @@
       v-card-actions
         v-spacer
         v-btn(color='blue-darken-1' variant='text' @click='close')
-          | Cancel
+          | İptal
         v-btn(color='blue-darken-1' variant='text' @click='save')
-          | Save
+          | Kaydet
   Toast(ref="toastDialogRef")
 </template>
 <script setup lang="ts">

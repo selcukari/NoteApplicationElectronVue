@@ -1,6 +1,6 @@
 <template lang="pug">
 .note-detail
-  v-dialog(v-model='dialog.dialog.isActive.value' width='500px')
+  v-dialog(v-model='dialog.dialog.isActive.value' width='600px')
     v-card
       v-card-title
         span.text-h5 Note Detail
@@ -13,8 +13,6 @@
             v-col(cols='12' md='10' sm='10')
               v-textarea(v-model='dialog.lazyValue.value.description'
               label='Acıklama' clear-icon="mdi-close-circle" variant="outlined")
-              span
-               | {{dialog.lazyValue}}
       v-card-actions
         v-spacer
         v-btn(color='blue-darken-1' variant='text' @click='close')
@@ -31,18 +29,16 @@ import { isEquals, Toast, isNullOrEmpty, usePromisifiedDialog } from '../utils';
 const toastDialogRef = ref(null)
 
 const defaultItem = () => ({
-    title: '',
-    description: '',
+  title: '',
+  description: '',
 });
 
 const dialog = usePromisifiedDialog(defaultItem());
 const edit = async newValue => { 
     dialog.clear();
-    console.log('edit', newValue);
     let isNew = false;
 
   const noteToSave = await dialog.edit(clone(newValue) || defaultItem());
-  console.log('noteToSave', noteToSave);
 
   if (!isEquals(clone(newValue) || defaultItem(), noteToSave)) {
     isNew = isNullOrEmpty(noteToSave?.id);
@@ -77,9 +73,7 @@ const save = async () => {
 
 const close = async () => {
   await dialog.cancel()
-  
 };
 
 defineExpose({ toastDialogRef, edit })
-
 </script>

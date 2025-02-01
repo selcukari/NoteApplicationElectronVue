@@ -5,7 +5,6 @@ const stateDialog = () => {
 
   const open = () => {
     isActive.value = true;
-    console.log('Dialog is open');
   };
   const close = () => {
     isActive.value = false;

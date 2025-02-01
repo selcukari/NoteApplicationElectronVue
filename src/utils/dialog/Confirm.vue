@@ -3,7 +3,7 @@
   template(v-for="dialog in dialogs")
     v-dialog(v-model='dialog.dialog.isActive' width='500px')
       v-card
-        v-card-title.text-h5 {{dialog.message}}
+        v-card-title.text-h5.wrap-text {{dialog.message}}
         v-card-actions
           v-spacer
           v-btn(color='blue-darken-1' variant='text' @click.native="accept(dialog)") EVET
@@ -45,4 +45,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.wrap-text {
+  white-space: pre-wrap; /* CSS3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+</style>
   

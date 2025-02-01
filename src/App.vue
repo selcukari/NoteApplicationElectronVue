@@ -49,10 +49,8 @@ provide('confirmDialogRef', confirmDialogRef);
 
 const reFetch = async () => {
   const data = await window.ipcRenderer.store.get();
-  console.log('data', data);
   
   const result = Object.values(data);
-  console.log('result', result);
 
   items.value = result;
 };
@@ -62,8 +60,6 @@ const editNote = async id => {
   const result = await noteDetailRef.value.edit(value);
 
    if (result) {
-      console.log('editNote', result);
-
       await reFetch();
    }
 };

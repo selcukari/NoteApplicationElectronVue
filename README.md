@@ -1,5 +1,20 @@
 # electron-note-app
 
+# özellikleri:
+veri ekleme: ekleme işlemi bittikten sonra toast mesajı ile bilgilendirme
+veri silme: silme işlemeinde confirm mesaj ile sorulması
+veri güncelleme
+verileri listeleme: data-table ile verilerin listelenmesi
+her crud işlemlerden sonra listenin güncellenmesi
+verileri girdikten sonra iptal deyince değişiklikler kaybolacak diye confirm mesaj verilmesi
+
+# kullanılan kütüphaneler:
+vuetify
+vue
+ramda
+date-fns
+pug
+
 ## Quick Setup
 
 ```sh

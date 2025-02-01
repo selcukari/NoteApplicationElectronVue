@@ -7,10 +7,10 @@
       v-card-text
         v-container
           v-row
-            v-col(cols='12' md='6' sm='6')
+            v-col(cols='12' md='10' sm='10')
               v-text-field(v-model='dialog.lazyValue.value.title' label='Note başlığı')
           v-row  
-            v-col(cols='12' md='6' sm='6')
+            v-col(cols='12' md='10' sm='10')
               v-textarea(v-model='dialog.lazyValue.value.description'
               label='Acıklama' clear-icon="mdi-close-circle" variant="outlined")
               span

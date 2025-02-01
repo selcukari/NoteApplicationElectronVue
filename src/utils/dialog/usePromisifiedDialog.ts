@@ -1,11 +1,10 @@
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { clone } from 'ramda';
-
 import useDialog from './useDialog';
 import isEquals from '../isEquals';
 
 const usePromisifiedDialog = (defaultValue = null, checkDirty = true) => {
-
+  const confirmDialogRef = inject('confirmDialogRef');
   const initialLazyValue = ref(defaultValue);
   const lazyValue = ref(defaultValue);
   const lazyResolve = ref(null);
@@ -35,11 +34,10 @@ const usePromisifiedDialog = (defaultValue = null, checkDirty = true) => {
     close();
   };
 
-
   const cancel = async () => {
     if (
       (!checkDirty || !isEquals((lazyValue.value), (initialLazyValue.value)))
-      ) {
+      && !(await confirmDialogRef.value.warning()('Yapmış olduğunuz değişiklikler iptal olacaktır. Devam etmek istiyor musunuz?'))) {
       return false;
     }
 

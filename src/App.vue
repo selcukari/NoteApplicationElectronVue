@@ -27,7 +27,7 @@ v-card(style="width: 1000px; margin: 0 auto;")
   Confirm(ref="confirmDialogRef")
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, provide } from 'vue'
 import TooltipIconButton from './components/TooltipIconButton.vue'
 import NoteDetail from './components/NoteDetail.vue'
 import { formatDateTime, Confirm } from './utils'
@@ -37,20 +37,15 @@ const noteDetailRef = ref(null)
 const confirmDialogRef = ref(null)
 
 const items = ref([]);
-const warning = () => async (message) => confirmDialogRef.value?.open(message, {
-    color: "warning",
-    buttonColors: {
-      accept: "warning",
-      decline: "gray", 
-    },
-  });
 
-const headers = [
+const headers = ref([
   { title: 'ID', key: 'id' },
   { title: 'Title', key: 'title' },
   { title: 'Date', key: 'createDate' },
   { title: 'Actions', key: 'actions', sortable: false },
-]
+])
+
+provide('confirmDialogRef', confirmDialogRef);
 
 const reFetch = async () => {
   const data = await window.ipcRenderer.store.get();
@@ -75,8 +70,7 @@ const editNote = async id => {
 
 
 const deleteNote = async id => {
-
-  if (await warning()('Bu notu silmek istediğinizden emin misiniz?')) {
+  if (await confirmDialogRef.value?.warning()('Bu notu silmek istediğinizden emin misiniz?')) {
     await window.ipcRenderer.store.delete(id.toString());
 
     await reFetch();

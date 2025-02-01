@@ -1,13 +1,13 @@
-# electron-vite-vue
+# electron-note-app
 
 ## Quick Setup
 
 ```sh
 # clone the project
-git clone https://github.com/electron-vite/electron-vite-vue.git
+git clone https://github.com/selcukari/NoteApplicationElectronVue.git
 
 # enter the project directory
-cd noteapp
+cd NoteApplicationElectronVue
 
 # install dependency
 npm install

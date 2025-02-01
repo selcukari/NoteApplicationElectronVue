@@ -1,7 +1,7 @@
 <template lang="pug">
 .confirm
   template(v-for="dialog in dialogs")
-    v-dialog(v-model='dialog.dialog.isActive' max-width='500px')
+    v-dialog(v-model='dialog.dialog.isActive' width='500px')
       v-card
         v-card-title.text-h5 {{dialog.message}}
         v-card-actions
@@ -26,8 +26,17 @@ export default {
       });
     };
 
+    const warning = () => async (message) => open(message, {
+    color: "warning",
+    buttonColors: {
+      accept: "warning",
+      decline: "gray", 
+    },
+  });
+
     return {
       dialogs,
+      warning,
       open,
       accept,
       decline,

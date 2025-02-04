@@ -9,7 +9,7 @@ v-card(style="width: 1000px; margin: 0 auto;")
   v-data-table(v-model:search='search' :filter-keys="['title']" :items='items' :headers="headers" :width="300" item-key="id")
     template(#item.createDate='{ item }')
       span
-       | {{ formatDateTime(item.createDate) }}
+       | {{ formatDateTime(item.updateDate || item.createDate) }}
     template(#item.actions='{ item }')
       TooltipIconButton(
         icon="mdi-pencil" 
@@ -79,30 +79,3 @@ onMounted(async () => {
 
 defineExpose({ noteDetailRef, confirmDialogRef })
 </script>
-
-<style>
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo.electron:hover {
-  filter: drop-shadow(0 0 2em #9FEAF9);
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

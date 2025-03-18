@@ -3,6 +3,7 @@ v-card(style="width: 1000px; margin: 0 auto;")
   v-card-title.d-flex.align-center.pe-2
     v-btn.mb-2(color='primary' @click="editNote()")
      | Yeni Not Ekle
+    v-checkbox(label="Silinenler" v-model="isActive" class="ml-auto" @change="reFetch")
     v-spacer
     v-text-field(v-model='search' density='compact' label='Search' prepend-inner-icon='mdi-magnify' variant='solo-filled' flat hide-details single-line)
   v-divider
@@ -18,10 +19,18 @@ v-card(style="width: 1000px; margin: 0 auto;")
         @onClick="editNote(item.id)"
       )
       TooltipIconButton(
+        v-if="!isActive"
         icon="mdi-delete" 
         btnColor="blue-grey lighten-1"
         text="Sil"
         @onClick="deleteNote(item.id)"
+      )
+      TooltipIconButton(
+        v-else
+        icon="mdi-arrow-left" 
+        btnColor="blue-grey lighten-1"
+        text="Geri Al"
+        @onClick="undoNote(item.id)"
       )
   NoteDetail(ref="noteDetailRef")
   Confirm(ref="confirmDialogRef")
@@ -32,6 +41,7 @@ import TooltipIconButton from './components/TooltipIconButton.vue'
 import NoteDetail from './components/NoteDetail.vue'
 import { formatDateTime, Confirm } from './utils'
 
+const isActive = ref(true)
 const search = ref('')
 const noteDetailRef = ref(null)
 const confirmDialogRef = ref(null)
@@ -49,9 +59,7 @@ provide('confirmDialogRef', confirmDialogRef);
 
 const reFetch = async () => {
   const data = await window.ipcRenderer.store.get();
-  
-  const result = Object.values(data);
-
+  const result = Object.values(data).filter(item => isActive.value === !item.isActive);
   items.value = result;
 };
 
@@ -68,6 +76,14 @@ const editNote = async id => {
 const deleteNote = async id => {
   if (await confirmDialogRef.value?.warning()('Bu notu silmek istediğinizden emin misiniz?')) {
     await window.ipcRenderer.store.delete(id.toString());
+
+    await reFetch();
+  }
+};
+
+const undoNote = async id => {
+  if (await confirmDialogRef.value?.warning()('Bu notu geri almak istediğinizden emin misiniz?')) {
+    await window.ipcRenderer.store.undo(id.toString());
 
     await reFetch();
   }

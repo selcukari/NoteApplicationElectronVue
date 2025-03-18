@@ -47,8 +47,8 @@ const edit = async newValue => {
         id: isNew ? Date.now() : noteToSave.id,
         title: noteToSave.title,
         description: noteToSave.description,
-        ...(isNew ? { createDate: new Date().toISOString() }:
-        {updateDate: new Date().toISOString(), createDate: noteToSave.createDate}),
+        ...(isNew ? { createDate: new Date().toISOString(), isActive: true } :
+        {updateDate: new Date().toISOString(), createDate: noteToSave.createDate, isActive: noteToSave.isActive}),
     }
 
     window.ipcRenderer.store.set({[newData.id]: newData});

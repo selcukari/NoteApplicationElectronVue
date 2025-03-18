@@ -126,6 +126,15 @@ ipcMain.handle('store-get', (_, key) => store.get(key));
 ipcMain.handle('store-set', (_, { key, value }) => store.set(key, value));
 ipcMain.handle('store-delete', (_, key) => {
   if (store.has(key)) {
-    store.delete(key);
+    const note = store.get(key);
+    note.isActive= false;
+    store.set(key, note);
+  }
+});
+ipcMain.handle('store-undo', (_, key) => {
+  if (store.has(key)) {
+    const note = store.get(key);
+    note.isActive= true;
+    store.set(key, note);
   }
 });

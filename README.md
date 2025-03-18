@@ -2,7 +2,8 @@
 
 # özellikleri:
 veri ekleme: ekleme işlemi bittikten sonra toast mesajı ile bilgilendirme
-veri silme: silme işlemeinde confirm mesaj ile sorulması
+veri silme: silme işlemeinde confirm mesaj ile sorulması ve silinenler grubuna eklenmesi
+geri alma: silinen note ların "geri al" butona tıklayarak  confirm messajı ile geri alması
 veri güncelleme
 verileri listeleme: data-table ile verilerin listelenmesi
 her crud işlemlerden sonra listenin güncellenmesi

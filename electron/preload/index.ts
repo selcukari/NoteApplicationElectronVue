@@ -28,6 +28,9 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     delete(key) {
       ipcRenderer.invoke('store-delete', key)
     },
+    undo(key) {
+      ipcRenderer.invoke('store-undo', key)
+    },
   }
 })
 
